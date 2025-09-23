@@ -1,0 +1,58 @@
+/* --- Light Theme (Default) --- */
+:root,
+[data-theme="light"] {
+  --primary-color: #007bff; /* Example: Bootstrap's default blue */
+  --secondary-color: #6c757d; /* Example: Bootstrap's default gray */
+  --page-bg: #ffffff;
+  --text-color: #212529;
+}
+
+/* --- Dark Theme --- */
+[data-theme="dark"] {
+  --primary-color: #0d6efd; /* A slightly different blue for dark mode */
+  --secondary-color: #adb5bd;
+  --page-bg: #212529;
+  --text-color: #f8f9fa;
+}
+
+/* --- Retro Theme --- */
+[data-theme="retro"] {
+  --primary-color: #ff9900; /* Orange primary */
+  --secondary-color: #2c3e50; /* Dark gray secondary */
+  --page-bg: #ecf0f1; /* Light gray background */
+  --text-color: #34495e; /* Darker text */
+}
+
+/* Apply variables to Bootstrap components or your own custom styles */
+body {
+  background-color: var(--page-bg);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-primary {
+  --bs-btn-bg: var(--primary-color);
+  --bs-btn-border-color: var(--primary-color);
+}
+
+/* --- Forest Theme (New!) --- */
+[data-theme="forest"] {
+  --primary-color: #2e8b57; /* Sea Green */
+  --page-bg: #2c5b3c; /* A deep forest green */
+  --text-color: #e0f2f1; /* Light cyan text */
+  --card-bg: #3c6e51; /* A medium forest green */
+}
+
+/* --- Candy Theme (New!) --- */
+[data-theme="candy"] {
+  --primary-color: #ff69b4; /* Hot Pink */
+  --page-bg: #ffc0cb; /* Light Pink */
+  --text-color: #800080; /* Purple text */
+  --card-bg: #ffa07a; /* Light Salmon */
+}
+
+/* Apply variables to Bootstrap components and your own styles */
+
+.card {
+  background-color: var(--card-bg);
+}
