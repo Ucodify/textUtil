@@ -34,6 +34,7 @@ export default function TextForm(props) {
       .catch((err) => {
         console.error("Failed to copy text: ", err);
       });
+    document.getSelection().removeAllRanges(); // To deselect the text
     props.showAlert(" Text Copied to Clipboard!", "success");
   };
 
@@ -55,11 +56,11 @@ export default function TextForm(props) {
       {/* Dark Mode working */}
       <div
         className='container'
-        style={{
-          color: props.mode === "dark" ? "white" : "black",
-        }}
+        // style={{
+        //   color: props.mode === "dark" ? "white" : "black",
+        // }}
       >
-        <h1>{props.heading}</h1>
+        <h1 style={{ color: "grey" }}>{props.heading}</h1>
         {/* Dark Mode working */}
         <div className='mb-3'>
           <textarea
@@ -68,42 +69,73 @@ export default function TextForm(props) {
             id='myBox'
             rows='8'
             onChange={handleOnChange}
-            style={{
-              backgroundColor: props.mode === "dark" ? "grey" : "white",
-              color: props.mode === "dark" ? "white" : "black",
-            }}
+            // style={{
+            //   backgroundColor: props.mode === "dark" ? "#13466e" : "white",
+            //   color: props.mode === "dark" ? "white" : "black",
+            // }}
           ></textarea>
         </div>
-        <button className='btn btn-primary m-3' onClick={handleUpClick}>
+        <button
+          disabled={text.length === 0}
+          className='btn btn-primary m-3'
+          onClick={handleUpClick}
+        >
           Convert to Uppercase
         </button>
-        <button className='btn btn-primary m-3' onClick={handleLoClick}>
+        <button
+          disabled={text.length === 0}
+          className='btn btn-primary m-3'
+          onClick={handleLoClick}
+        >
           Convert to Lowercase
         </button>
-        <button className='btn btn-primary m-3' onClick={handleOnCopy}>
+        <button
+          disabled={text.length === 0}
+          className='btn btn-primary m-3'
+          onClick={handleOnCopy}
+        >
           Copy Text
         </button>
-        <button className='btn btn-primary m-3' onClick={handleClearClick}>
+        <button
+          disabled={text.length === 0}
+          className='btn btn-primary m-3'
+          onClick={handleClearClick}
+        >
           Clear Text
         </button>
-        <button className='btn btn-primary m-3' onClick={handleExtraSpaces}>
+        <button
+          disabled={text.length === 0}
+          className='btn btn-primary m-3'
+          onClick={handleExtraSpaces}
+        >
           Remove Extra Spaces
         </button>
       </div>
       {/* Dark Mode working */}
       <div
         className='container my-5'
-        style={{
-          color: props.mode === "dark" ? "white" : "black",
-        }}
+        // style={{
+        //   color: props.mode === "dark" ? "white" : "black",
+        // }}
       >
-        <h2>Your Text Summary</h2>
+        <h2 style={{ color: "grey" }}>Your Text Summary</h2>
         <p>
-          {text.split(" ").length} words and {text.length} characters
+          {
+            text.split(" ").filter((element) => {
+              return element.length !== 0;
+            }).length
+          }{" "}
+          words and {text.length} characters
         </p>
-        <p>{0.008 * text.split(" ").length} minutes read</p>
+        <p>
+          {0.008 *
+            text.split(" ").filter((element) => {
+              return element.length !== 0;
+            }).length}{" "}
+          minutes read
+        </p>
         <h2>Preview</h2>
-        <p>{text.length > 0 ? text : "Enter Something to preview it here"}</p>
+        <p>{text.length > 0 ? text : "Nothing to preview"}</p>
       </div>
     </>
   );

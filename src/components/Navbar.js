@@ -1,6 +1,31 @@
 import React from "react";
-// import { Link } from "react-router-dom";
-//import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+// import PropTypes from "prop-types";
+import { ThemeContext, ThemeProvider } from "./ThemeContext";
+import { Dropdown, DropdownButton, Container } from "react-bootstrap";
+import { useContext } from "react";
+
+const ThemeChanger = () => {
+  const { theme, setTheme } = useContext(ThemeContext);
+
+  return (
+    <Container className='justify-content-end align-items-end d-flex me-5 cursor-pointer'>
+      <DropdownButton title={`Current Theme: ${theme}`} variant='primary'>
+        <Dropdown.Item onClick={() => setTheme("light")}>Light</Dropdown.Item>
+        <Dropdown.Item onClick={() => setTheme("dark")}>Dark</Dropdown.Item>
+        <Dropdown.Item onClick={() => setTheme("retro")}>Retro</Dropdown.Item>
+        <Dropdown.Item onClick={() => setTheme("forest")}>
+          Forest
+        </Dropdown.Item>{" "}
+        {/* New theme */}
+        <Dropdown.Item onClick={() => setTheme("candy")}>
+          Candy
+        </Dropdown.Item>{" "}
+        {/* New theme */}
+      </DropdownButton>
+    </Container>
+  );
+};
 
 export default function Navbar(props) {
   return (
@@ -10,9 +35,9 @@ export default function Navbar(props) {
         className={`navbar navbar-expand-lg bg-${props.mode} navbar-${props.mode} bg-${props.mode}`}
       >
         <div className='container-fluid'>
-          <a className='navbar-brand' href='/'>
+          <Link className='navbar-brand' to='/'>
             {props.title}
-          </a>
+          </Link>
           <button
             className='navbar-toggler'
             type='button'
@@ -26,7 +51,7 @@ export default function Navbar(props) {
           </button>
           <div className='collapse navbar-collapse' id='navbarSupportedContent'>
             <ul className='navbar-nav me-auto mb-2 mb-lg-0'>
-              {/* <li className='nav-item'>
+              <li className='nav-item'>
                 <Link
                   className='nav-link active'
                   aria-current='page'
@@ -34,50 +59,80 @@ export default function Navbar(props) {
                 >
                   {props.aboutText}
                 </Link>
-              </li> */}
+              </li>
               <li className='nav-item'>
-                <a className='nav-link' href='/'>
+                <Link className='nav-link' to='/'>
                   Home
-                </a>
+                </Link>
               </li>
               <li className='nav-item dropdown'>
-                <a
+                <Link
                   className='nav-link dropdown-toggle'
-                  href='/'
+                  to='/'
                   role='button'
                   data-bs-toggle='dropdown'
                   aria-expanded='false'
                 >
                   Services
-                </a>
+                </Link>
                 <ul className='dropdown-menu'>
                   <li>
-                    <a className='dropdown-item' href='/'>
+                    <Link className='dropdown-item' to='/'>
                       Marketing
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a className='dropdown-item' href='/'>
+                    <Link className='dropdown-item' to='/'>
                       Software Solutions
-                    </a>
+                    </Link>
                   </li>
                   <li>
                     <hr className='dropdown-divider' />
                     Hiring
                   </li>
                   <li>
-                    <a className='dropdown-item' href='/'>
+                    <Link className='dropdown-item' to='/'>
                       Contact
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </li>
             </ul>
+            <ThemeProvider>
+              <ThemeChanger />
+            </ThemeProvider>
+
             {/* Dark Mode working */}
-            <div
+            {/* <div>
+<div className='bg-primary rounded mx-2' onClick={()=>{props.toggleMode('primary')}} style={{height:'30px', width:'30px', cursor:'pointer', border:'2px solid black'}}></div>
+            </div> 
+            <div>
+<div className='bg-secondary rounded mx-2' onClick={()=>{props.toggleMode('secondary')}} style={{height:'30px', width:'30px', cursor:'pointer', border:'2px solid black'}}></div>
+            </div>
+            <div>
+<div className='bg-info rounded mx-2' onClick={()=>{props.toggleMode('info')}} style={{height:'30px', width:'30px', cursor:'pointer', border:'2px solid black'}}></div>
+            </div>
+            <div>
+<div className='bg-success rounded mx-2' onClick={()=>{props.toggleMode('success')}} style={{height:'30px', width:'30px', cursor:'pointer', border:'2px solid black'}}></div>
+            </div>
+            <div>
+<div className='bg-warning rounded mx-2' onClick={()=>{props.toggleMode('warning')}} style={{height:'30px', width:'30px', cursor:'pointer', border:'2px solid black'}}></div>
+            </div>
+            <div>
+<div className='bg-danger rounded mx-2' onClick={()=>{props.toggleMode('danger')}} style={{height:'30px', width:'30px', cursor:'pointer', border:'2px solid black'}}></div>
+            </div>
+            <div>
+<div className='bg-light rounded mx-2' onClick={()=>{props.toggleMode('light')}} style={{height:'30px', width:'30px', cursor:'pointer', border:'2px solid black'}}></div>
+            </div>
+            <div>
+<div className='bg-dark rounded mx-2' onClick={()=>{props.toggleMode('dark')}} style={{height:'30px', width:'30px', cursor:'pointer', border:'2px solid black'}}></div>
+            </div>
+            </div>
+            */}
+            {/* <div
               className={`form-check form-switch text-${
                 props.mode === "light" ? "dark" : "light"
-              } mx-3`}
+              } me-5 px-5`}
             >
               <input
                 className='form-check-input'
@@ -90,9 +145,9 @@ export default function Navbar(props) {
                 className='form-check-label'
                 htmlFor='flexSwitchCheckDefault'
               >
-                Enable Light Mode
+                Theme
               </label>
-            </div>
+            </div> */}
           </div>
         </div>
       </nav>

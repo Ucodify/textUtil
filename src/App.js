@@ -4,42 +4,13 @@ import "./index.css";
 import Navbar from "./components/Navbar";
 import TextForm from "./components/TextForm";
 import Alert from "./components/Alert";
-// import About from "./components/About";
-import { ThemeContext, ThemeProvider } from "./components/ThemeContext";
-import { Dropdown, DropdownButton, Container } from "react-bootstrap";
-// import {
-//   Link,
-//   createBrowserRouter,
-//   Route,
-//   Switch,
-//   Routes,
-// } from "react-router-dom";
-// import { BrowserRouter as Router } from "react-router-dom";
-// import { createRoot } from "react-dom/client";
+import About from "./components/About";
+// import { ThemeContext, ThemeProvider } from "./components/ThemeContext";
+// import { Dropdown, DropdownButton, Container } from "react-bootstrap";
+import { createBrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
+import { createRoot } from "react-dom/client";
 
-const ThemeChanger = () => {
-  const { theme, setTheme } = useContext(ThemeContext);
-
-  return (
-    <Container className='my-5 p-5 border rounded'>
-      <h1>Custom Color Palettes</h1>
-      <p>Select a theme from the dropdown below:</p>
-      <DropdownButton title={`Current Theme: ${theme}`} variant='primary'>
-        <Dropdown.Item onClick={() => setTheme("light")}>Light</Dropdown.Item>
-        <Dropdown.Item onClick={() => setTheme("dark")}>Dark</Dropdown.Item>
-        <Dropdown.Item onClick={() => setTheme("retro")}>Retro</Dropdown.Item>
-        <Dropdown.Item onClick={() => setTheme("forest")}>
-          Forest
-        </Dropdown.Item>{" "}
-        {/* New theme */}
-        <Dropdown.Item onClick={() => setTheme("candy")}>
-          Candy
-        </Dropdown.Item>{" "}
-        {/* New theme */}
-      </DropdownButton>
-    </Container>
-  );
-};
 function App() {
   const [mode, setMode] = useState("dark");
 
@@ -56,60 +27,68 @@ function App() {
   };
 
   // Dark Mode working
-
-  const toggleMode = () => {
-    if (mode === "light") {
-      setMode("dark");
-      document.body.style.backgroundColor = "grey";
-      showAlert("Dark mode has been enabled", "success");
-      // document.title = "TextUtils is Amazing - Dark Mode";
-      setInterval(() => {
-        document.title = "TextUtils is amazing";
-      }, 2000);
-      setInterval(() => {
-        document.title = "Install TextUtils Now";
-      }, 1500);
-    } else {
-      setMode("light");
-      document.body.style.backgroundColor = "white";
-      showAlert("Light mode has been enabled", "success");
-      document.title = "TextUtils - Light Mode";
-    }
-  };
+//const remooveBodyClasses=()=>{
+//document.body.classList.remove('bg-light')
+//document.body.classList.remove('bg-dark')
+//document.body.classList.remove('bg-warning')
+//document.body.classList.remove('bg-danger')
+//document.body.classList.remove('bg-success')
+//}
+  // const toggleMode = (cls) => {
+    //removeBodyClasses();
+    //console.log(cls);
+//document.body.classList.add('bg-' + cls)
+  //   if (mode === "light") {
+  //     setMode("dark");
+  //     document.body.style.backgroundColor = "grey";
+  //     showAlert("Dark mode has been enabled", "success");
+  //     // document.title = "TextUtils is Amazing - Dark Mode";
+  //     setInterval(() => {
+  //       document.title = "TextUtils is amazing";
+  //     }, 2000);
+  //     setInterval(() => {
+  //       document.title = "Install TextUtils Now";
+  //     }, 1500);
+  //   } else {
+  //     setMode("light");
+  //     document.body.style.backgroundColor = "white";
+  //     showAlert("Light mode has been enabled", "success");
+  //     document.title = "TextUtils - Light Mode";
+  //   }
+  // };
 
   return (
     <>
       <div>
-        {/* <Router> */}
+        <Router>
           {/* Dark Mode working */}
           <Navbar
             title='TextUtils'
-            aboutText='About TextUtils'
+            aboutText='About'
             mode={mode}
-            toggleMode={toggleMode}
+            // toggleMode={toggleMode}
           />
 
-          <ThemeProvider>
-            <ThemeChanger />
-          </ThemeProvider>
           <Alert alert={alert} />
-          <div className='container my-3'>
+          {/* <div className='container my-3'>
           <TextForm heading='Enter the text to analyse' showAlert={showAlert} />
-          {/* <About /> */}
-        </div>
-          {/* <Routes>
-            <Route exact path='/about' element={<About />}></Route>
-            <Route exact
+          <About /> 
+        </div> */}
+          <Routes>
+            <Route exact path='/about' element={<About mode={mode} />}></Route>
+            <Route
+              exact
               path='/'
               element={
                 <TextForm
-                  heading='Enter the text to analyse'
+                  heading=' TextUtils - Word Counter, Character Counter, Remove extra spaces'
                   showAlert={showAlert}
+                  mode={mode}
                 />
               }
             ></Route>
           </Routes>
-        </Router> */}
+        </Router>
       </div>
     </>
   );
